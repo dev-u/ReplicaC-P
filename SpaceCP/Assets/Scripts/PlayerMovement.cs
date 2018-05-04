@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         player = GetComponent<Rigidbody2D>();
-		
+
 	}
 	
 	// Update is called once per frame
@@ -20,7 +20,15 @@ public class PlayerMovement : MonoBehaviour {
         diretion.y = Input.GetAxisRaw("Vertical");
         diretion.x = Input.GetAxisRaw("Horizontal");
         moveVelocity = diretion * velocity;
-     
+
+
+        Vector3 mouseLocation = Input.mousePosition;
+        mouseLocation = Camera.main.ScreenToWorldPoint(mouseLocation);
+
+
+        Vector2 Location = new Vector2(mouseLocation.x - transform.position.x, mouseLocation.y - transform.position.y);
+        transform.up = Location;
+  
 	}
 	private void FixedUpdate()
 	{
